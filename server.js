@@ -1,13 +1,15 @@
 import express from "express";
 import router from "./routes.js";
 import bodyparser from "body-parser";
+import fileService from "./fileService.js";
 
 const app = express();
 let time = new Date();
 
 app.use((req, res, next) => {
   let curentTime = new Date();
-  console.log("middleware test @", `${curentTime}`);
+  console.log("request @", `${curentTime}`);
+  fileService.append("./db/logs.txt", `\nrequest @  + ${curentTime}`);
   next();
 });
 
